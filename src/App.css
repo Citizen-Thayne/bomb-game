@@ -1,3 +1,27 @@
 .App {
   text-align: center;
 }
+
+.bomb-game {
+  width: 800px;
+  height: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.bomb-bin-row {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 100px;
+  bottom: 100px;
+  display: flex;
+  justify-content: space-around;
+}
+
+
+.bomb-bin {
+  height: 100px;
+  width: 100px;
+}
