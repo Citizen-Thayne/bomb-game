@@ -21,7 +21,7 @@ class BombBin extends Component {
     return (
       <div
         style={style}
-        className={`bomb-bin ${className}`}
+        className={`bomb-bin ${className || ''}`}
       >
       </div>
     )

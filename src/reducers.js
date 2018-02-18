@@ -1,6 +1,7 @@
 import COLORS from './Colors'
 import {
-  SWAP_BIN_COLORS
+  SWAP_BIN_COLORS,
+  SPAWN_BOMB
 } from './actions'
 
 const INITIAL_BINS = [{
@@ -10,6 +11,11 @@ const INITIAL_BINS = [{
 }, {
   color: COLORS.GREEN
 }]
+
+const getRandomColor = () => {
+  var colors = Object.values(COLORS)
+  return colors[Math.floor(Math.random() * colors.length)]
+}
 
 export default (state = {}, action) => {
   switch (action.type) {
@@ -22,6 +28,16 @@ export default (state = {}, action) => {
       return {
         ...state,
         bins
+      }
+    case SPAWN_BOMB:
+      let bombs = state.bombs || []
+      let bomb = {
+        color: getRandomColor()
+      }
+      bombs.push(bomb)
+      return {
+        ...state,
+        bombs
       }
   }
 }
