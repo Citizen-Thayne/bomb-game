@@ -10,6 +10,12 @@
   position: relative;
 }
 
+.bomb-game .bomb-bin-countdown {
+  right: 40px;
+  bottom: 40px;
+  position: absolute;
+}
+
 .bomb-bin-row {
   position: absolute;
   left: 0;
