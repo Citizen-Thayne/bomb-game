@@ -7,8 +7,9 @@ export function swapBinColors() {
   }
 }
 
-export function spawnBomb() {
+export function spawnBomb(bomb) {
   return {
-    type: SPAWN_BOMB
+    type: SPAWN_BOMB,
+    bomb
   }
 }

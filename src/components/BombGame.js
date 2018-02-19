@@ -8,6 +8,9 @@ import BombBinContainer from '../containers/BombBinContainer'
 import { swapBinColors, spawnBomb } from '../actions'
 import BombBinCountdown from './BombBinCountdown';
 import DraggableBomb from '../components/DraggableBomb'
+import BombSpawnTimerFactory from '../utils/BombSpawnTimerFactory'
+import BombFactory from '../utils/BombFactory';
+
 
 const BIN_CHANGE_INTERVAL = 40
 
@@ -25,22 +28,24 @@ class BombGame extends Component {
     this.state = {
       changeIn: BIN_CHANGE_INTERVAL
     }
-    
-    const timer = interval(1000)
-    timer.subscribe(val => {
+
+    const binTimer = interval(1000)
+    binTimer.subscribe(val => {
       let changeIn = (BIN_CHANGE_INTERVAL - (val % (BIN_CHANGE_INTERVAL)))
       if(changeIn === BIN_CHANGE_INTERVAL && val) {
-        self.props.dispatch(swapBinColors())
+        swapBinColors()
       }
       self.setState({changeIn})
     })
-    timer.subscribe(() => {
-      props.spawnBomb()
+
+    const bombSpawnTimer = BombSpawnTimerFactory()
+    bombSpawnTimer.subscribe((val) => {
+      spawnBomb(BombFactory())
     })
   }
   render() {
     let { bombs } = this.props
-    bombs = bombs.map(b => <DraggableBomb {...b}></DraggableBomb>)
+    bombs = bombs.map((b, i) => <DraggableBomb {...b} key={i}></DraggableBomb>)
 
     return (
       <div className='bomb-game'>
@@ -59,7 +64,7 @@ class BombGame extends Component {
 const mapStateToProps = (state = {}) => ({bombs: state.bombs || []})
 const mapDispatchToProps = dispatch => ({
   swapBinColors: () => dispatch(swapBinColors()),
-  spawnBomb: () => dispatch(spawnBomb())
+  spawnBomb: (bomb) => dispatch(spawnBomb(bomb))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BombGame);

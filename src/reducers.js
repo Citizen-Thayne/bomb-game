@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 import COLORS from './Colors'
 import {
   SWAP_BIN_COLORS,
@@ -17,6 +19,8 @@ const getRandomColor = () => {
   return colors[Math.floor(Math.random() * colors.length)]
 }
 
+const getRandomBombLifetime = () => _.random(4, 11)
+
 export default (state = {}, action) => {
   switch (action.type) {
     case SWAP_BIN_COLORS:
@@ -30,10 +34,10 @@ export default (state = {}, action) => {
         bins
       }
     case SPAWN_BOMB:
+      const {
+        bomb
+      } = action
       let bombs = state.bombs || []
-      let bomb = {
-        color: getRandomColor()
-      }
       bombs.push(bomb)
       return {
         ...state,

@@ -5,7 +5,9 @@ import Bomb from './Bomb'
 
 const DraggableBomb = (props) => {
   return (
-    <Draggable onStop={props.onStop}>
+    <Draggable 
+      onStop={props.onStop}
+      bounds='parent'>
       <Bomb {...props}></Bomb>
     </Draggable>
   )
