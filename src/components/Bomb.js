@@ -5,6 +5,7 @@ import COLORS from '../Colors'
 class Bomb extends Component {
   static propTypes = {
     color: PropTypes.oneOf(Object.values(COLORS)).isRequired,
+    lifetime: PropTypes.number.isRequired,
     style: PropTypes.object,
     className: PropTypes.string,
     onMouseDown: PropTypes.func,
@@ -13,7 +14,7 @@ class Bomb extends Component {
     onTouchEnd: PropTypes.func,
   }
   render() {
-    let { color, style, className, onMouseDown, onMouseUp, onTouchStart, onTouchEnd} = this.props
+    let { color, style, className, onMouseDown, onMouseUp, onTouchStart, onTouchEnd, lifetime} = this.props
     style = {
       ...style,
       backgroundColor: color
@@ -27,6 +28,7 @@ class Bomb extends Component {
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
         >
+        <div className='bomb-lifetime'>{lifetime}</div>
       </div>
     )
   }

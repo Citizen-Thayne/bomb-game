@@ -1,10 +1,5 @@
-import {
-  timer
-} from 'rxjs/observable/timer'
-import { from } from 'rxjs/observable/from'
 import 'rxjs/add/operator/switchMap'
 import { Observable } from 'rxjs/Observable';
-
 
 const INITIAL_INTERVAL = 5000
 const TIMER_ACCELERATION = 500

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { interval } from 'rxjs/observable/interval'
-import { sample } from 'rxjs/operators'
 
-import COLORS from '../Colors'
 import BombBinContainer from '../containers/BombBinContainer'
 import { swapBinColors, spawnBomb } from '../actions'
 import BombBinCountdown from './BombBinCountdown';
@@ -45,7 +43,10 @@ class BombGame extends Component {
   }
   render() {
     let { bombs } = this.props
-    bombs = bombs.map((b, i) => <DraggableBomb {...b} key={i}></DraggableBomb>)
+    
+    bombs = Object.values(bombs)
+      .filter(b => b.isAlive)
+      .map((b, i) => <DraggableBomb {...b} key={i}></DraggableBomb>)
 
     return (
       <div className='bomb-game'>
@@ -61,7 +62,7 @@ class BombGame extends Component {
   }
 }
 
-const mapStateToProps = (state = {}) => ({bombs: state.bombs || []})
+const mapStateToProps = (state = {}) => ({bombs: state.bombs || {}})
 const mapDispatchToProps = dispatch => ({
   swapBinColors: () => dispatch(swapBinColors()),
   spawnBomb: (bomb) => dispatch(spawnBomb(bomb))

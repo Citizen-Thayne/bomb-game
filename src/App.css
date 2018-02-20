@@ -38,3 +38,15 @@
   height: 100px;
   /* position: abs */
 }
+
+.bomb .bomb-lifetime {
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  top: 5px;
+  right: 5px;
+  background-color: #e2c637;
+  border-radius: 50%;
+  line-height: 25px;
+  text-align: center;
+}
