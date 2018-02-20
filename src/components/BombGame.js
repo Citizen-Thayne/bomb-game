@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { interval } from 'rxjs/observable/interval'
 
 import BombBinContainer from '../containers/BombBinContainer'
-import { swapBinColors, spawnBomb } from '../actions'
+import { swapBinColors, spawnBomb, updateBombPosition } from '../actions'
 import BombBinCountdown from './BombBinCountdown';
 import DraggableBomb from '../components/DraggableBomb'
 import BombSpawnTimerFactory from '../utils/BombSpawnTimerFactory'
@@ -18,7 +18,8 @@ class BombGame extends Component {
     var self = this
     const {
       swapBinColors,
-      spawnBomb
+      spawnBomb,
+      updateBombPosition
     } = props
     //Initialize bins
     swapBinColors()
@@ -46,7 +47,12 @@ class BombGame extends Component {
     
     bombs = Object.values(bombs)
       .filter(b => b.isAlive)
-      .map((b, i) => <DraggableBomb {...b} key={i}></DraggableBomb>)
+      .map((b, i) => <DraggableBomb 
+        {...b} 
+        key={b.id} 
+        onDrag={(e, data) => console.log({data})}
+        onStop={(x) => console.log({x})}
+      ></DraggableBomb>)
 
     return (
       <div className='bomb-game'>
@@ -65,7 +71,8 @@ class BombGame extends Component {
 const mapStateToProps = (state = {}) => ({bombs: state.bombs || {}})
 const mapDispatchToProps = dispatch => ({
   swapBinColors: () => dispatch(swapBinColors()),
-  spawnBomb: (bomb) => dispatch(spawnBomb(bomb))
+  spawnBomb: (bomb) => dispatch(spawnBomb(bomb)),
+  updateBombPosition: (id, x, y) => dispatch(updateBombPosition(id, x, y))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BombGame);

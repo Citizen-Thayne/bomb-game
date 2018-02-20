@@ -3,7 +3,8 @@ import {
   SWAP_BIN_COLORS,
   SPAWN_BOMB,
   SET_BOMB_LIFETIME,
-  DETONATE_BOMB
+  DETONATE_BOMB,
+  UPDATE_BOMB_POSITION
 } from './actions'
 
 const INITIAL_BINS = [{
@@ -62,6 +63,23 @@ export default (state = {}, action) => {
       let bomb = bombs[id]
       bomb.isAlive = false
       bomb.didExplode = true
+      return {
+        ...state,
+        bombs
+      }
+    },
+    [UPDATE_BOMB_POSITION]() {
+      const {
+        x,
+        y,
+        id
+      } = action
+      let {
+        bombs
+      } = state
+      let bomb = bombs[id]
+      bomb.x = x
+      bomb.y = y
       return {
         ...state,
         bombs

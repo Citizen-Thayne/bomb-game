@@ -2,7 +2,7 @@ import 'rxjs/add/operator/switchMap'
 import { Observable } from 'rxjs/Observable';
 
 const INITIAL_INTERVAL = 5000
-const TIMER_ACCELERATION = 500
+const TIMER_ACCELERATION = 100
 const TIMER_LOWER_LIMIT = 500
 
 const BombSpawnTimerFactory = () => {

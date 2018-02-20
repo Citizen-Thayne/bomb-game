@@ -36,7 +36,7 @@
   border-radius: 50%;
   width: 100px;
   height: 100px;
-  /* position: abs */
+  position: absolute;
 }
 
 .bomb .bomb-lifetime {

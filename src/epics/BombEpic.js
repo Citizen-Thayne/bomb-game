@@ -25,11 +25,6 @@ const BombFuseEpic = action$ =>
       scan((acc, curr) => curr ? curr + acc : acc, bomb.lifetime),
       takeWhile(v => v >= 0),
       map(val => val ? setBombLifetime(bomb.id, val) : detonateBomb(bomb.id)
-      //   ({
-      //   type: SET_BOMB_LIFETIME,
-      //   id: bomb.id,
-      //   lifetime: v
-      // })
     )
     ))
   )
