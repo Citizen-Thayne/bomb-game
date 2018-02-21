@@ -10,6 +10,7 @@ const BombFactory = () => ({
   lifetime: _.random(5) + 5,
   initialX: _.random(800),
   initialY: _.random(400),
+  diameter: 100,
   isAlive: true,
   didExplode: false
 })

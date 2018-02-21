@@ -6,8 +6,9 @@ export const UPDATE_BOMB_LIFETIME = 'UPDATE_BOMB_LIFETIME'
 export const DISARM_BOMB = 'DISARM_BOMB'
 export const DETONATE_BOMB = 'DETONATE_BOMB'
 export const UPDATE_BOMB_POSITION = 'UPDATE_BOMB_POSITION'
+export const UPDATE_BIN_SIZE = 'UPDATE_BIN_SIZE'
 
-export function startGame () {
+export function startGame() {
   return {
     type: START_GAME
   }
@@ -60,6 +61,14 @@ export function updateBombPosition(id, x, y) {
     type: UPDATE_BOMB_POSITION,
     id,
     x,
-    y,
+    y
+  }
+}
+
+export function updateBinSize(id, size) {
+  return {
+    type: UPDATE_BIN_SIZE,
+    id,
+    size
   }
 }

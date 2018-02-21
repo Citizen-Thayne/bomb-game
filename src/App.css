@@ -6,6 +6,7 @@
   margin-left: auto;
   margin-right: auto;
   position: relative;
+  border: 1px solid black;
 }
 
 .bomb-game .bomb-bin-countdown {
@@ -14,26 +15,9 @@
   position: absolute;
 }
 
-.bomb-bin-row {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 100px;
-  bottom: 100px;
-  display: flex;
-  justify-content: space-around;
-}
-
-
-.bomb-bin {
-  height: 100px;
-  width: 100px;
-}
-
 .bomb {
+  z-index: 10;
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
   position: absolute;
 }
 

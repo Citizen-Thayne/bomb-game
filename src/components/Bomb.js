@@ -15,6 +15,7 @@ class Bomb extends Component {
   }
   render() {
     let {
+      diameter,
       color,
       style,
       className,
@@ -26,6 +27,8 @@ class Bomb extends Component {
     } = this.props
     style = {
       ...style,
+      height: diameter + 'px',
+      width: diameter + 'px',
       backgroundColor: color
     }
     return (

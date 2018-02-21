@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import { Subject } from 'rxjs/Subject'
 
 import BombBinContainer from '../containers/BombBinContainer'
 import BombBinCountdownContainer from '../containers/BombBinCountdownContainer'
 import BombCollectionContainer from '../containers/BombCollectionContainer'
-
 
 class BombGame extends Component {
   constructor(props) {
@@ -20,12 +18,12 @@ class BombGame extends Component {
     }
     return (
       <div className="bomb-game" style={style}>
-        <BombCollectionContainer></BombCollectionContainer>
-        <div className="bomb-bin-row">
-          <BombBinContainer index={0} />
-          <BombBinContainer index={1} />
-          <BombBinContainer index={2} />
-        </div>
+        <BombCollectionContainer />
+
+        <BombBinContainer index={0} />
+        <BombBinContainer index={1} />
+        <BombBinContainer index={2} />
+
         <BombBinCountdownContainer />
       </div>
     )

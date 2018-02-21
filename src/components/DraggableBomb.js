@@ -3,17 +3,14 @@ import Draggable from 'react-draggable'
 
 import Bomb from './Bomb'
 
-const DraggableBomb = (props) => {
-  const defaultPosition = {
-    x: props.initialX,
-    y: props.initialY
-  }
+const DraggableBomb = props => {
+  const { initialX, initialY, onDrag, onStop, id } = props
   return (
     <Draggable
-      defaultPosition={defaultPosition}
-      // onDrag={props.onDrag}
-      // onStop={props.onStop}
-      id={props.id}
+      defaultPosition={{ x: initialX, y: initialY }}
+      onDrag={onDrag}
+      onStop={onStop}
+      id={id}
       bounds="parent"
     >
       <Bomb {...props} />

@@ -6,7 +6,8 @@ import {
   DETONATE_BOMB,
   UPDATE_BOMB_POSITION,
   DISARM_BOMB,
-  UPDATE_BIN_SWAP_COUNTDOWN
+  UPDATE_BIN_SWAP_COUNTDOWN,
+  UPDATE_BIN_SIZE
 } from './actions'
 
 const BIN_SWAP_INTERVAL = 40
@@ -17,23 +18,30 @@ const DEFAULT_STATE = {
     height: 800
   },
   binSwapCountdown: BIN_SWAP_INTERVAL,
-  bins: [{
-    color: COLORS.BLUE,
-    x: 600,
-    y: 200
-  }, {
-    color: COLORS.RED,
-    x: 600,
-    y: 400
-  }, {
-    color: COLORS.GREEN,
-    x: 600,
-    y: 600
-  }],
+  bins: [
+    {
+      color: COLORS.BLUE,
+      size: 100,
+      y: 600,
+      x: 150
+    },
+    {
+      color: COLORS.RED,
+      size: 100,
+      y: 600,
+      x: 350
+    },
+    {
+      color: COLORS.GREEN,
+      size: 100,
+      y: 600,
+      x: 550
+    }
+  ],
   bombs: {}
 }
 
-export default (state =  DEFAULT_STATE, action) => {
+export default (state = DEFAULT_STATE, action) => {
   const reducer = {
     [UPDATE_BIN_SWAP_COUNTDOWN]() {
       return {
@@ -42,7 +50,7 @@ export default (state =  DEFAULT_STATE, action) => {
       }
     },
     [SWAP_BIN_COLORS]() {
-      var bins = state.bins 
+      var bins = [...state.bins]
       var firstColor = bins[0].color
       bins[0].color = bins[1].color
       bins[1].color = bins[2].color
@@ -53,10 +61,8 @@ export default (state =  DEFAULT_STATE, action) => {
       }
     },
     [SPAWN_BOMB]() {
-      const {
-        bomb
-      } = action
-      let bombs = {...state.bombs}
+      const { bomb } = action
+      let bombs = { ...state.bombs }
       bombs[bomb.id] = bomb
       return {
         ...state,
@@ -64,13 +70,10 @@ export default (state =  DEFAULT_STATE, action) => {
       }
     },
     [UPDATE_BOMB_LIFETIME]() {
-      const {
-        id,
-        lifetime
-      } = action
-      let bombs = {...state.bombs}
+      const { id, lifetime } = action
+      let bombs = { ...state.bombs }
       let bomb = bombs[id]
-      if (!bomb) throw new Error("Bomb not found")
+      if (!bomb) throw new Error('Bomb not found')
       bomb.lifetime = lifetime
       return {
         ...state,
@@ -78,12 +81,10 @@ export default (state =  DEFAULT_STATE, action) => {
       }
     },
     [DISARM_BOMB]() {
-      const {
-        id
-      } = state
-      let bombs = {...state.bombs}
+      const { id } = action
+      let bombs = { ...state.bombs }
       let bomb = bombs[id]
-      if(bomb.isAlive) {
+      if (bomb.isAlive) {
         bomb.isAlive = false
         bomb.didExplode = false
       }
@@ -93,12 +94,10 @@ export default (state =  DEFAULT_STATE, action) => {
       }
     },
     [DETONATE_BOMB]() {
-      const {
-        id
-      } = action
-      let bombs = {...state.bombs}
+      const { id } = action
+      let bombs = { ...state.bombs }
       let bomb = bombs[id]
-      if(bomb.isAlive) {
+      if (bomb.isAlive) {
         bomb.isAlive = false
         bomb.didExplode = true
       }
@@ -108,21 +107,22 @@ export default (state =  DEFAULT_STATE, action) => {
       }
     },
     [UPDATE_BOMB_POSITION]() {
-      const {
-        x,
-        y,
-        id
-      } = action
-      let {
-        bombs
-      } = state
+      const { x, y, id } = action
+      let { bombs } = state
       let bomb = bombs[id]
       bomb.x = x
       bomb.y = y
+      
       return {
         ...state,
         bombs
       }
+    },
+    [UPDATE_BIN_SIZE]() {
+      const { id, size } = action
+      const bins = { ...state.bins }
+      bins[id].size = size
+      return { ...state, bins }
     }
   }[action.type]
   return reducer ? reducer() : state
