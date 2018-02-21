@@ -2,23 +2,47 @@ import COLORS from './Colors'
 import {
   SWAP_BIN_COLORS,
   SPAWN_BOMB,
-  SET_BOMB_LIFETIME,
+  UPDATE_BOMB_LIFETIME,
   DETONATE_BOMB,
-  UPDATE_BOMB_POSITION
+  UPDATE_BOMB_POSITION,
+  DISARM_BOMB,
+  UPDATE_BIN_SWAP_COUNTDOWN
 } from './actions'
 
-const INITIAL_BINS = [{
-  color: COLORS.BLUE
-}, {
-  color: COLORS.RED
-}, {
-  color: COLORS.GREEN
-}]
+const BIN_SWAP_INTERVAL = 40
 
-export default (state = {}, action) => {
+const DEFAULT_STATE = {
+  gameDimensions: {
+    width: 800,
+    height: 800
+  },
+  binSwapCountdown: BIN_SWAP_INTERVAL,
+  bins: [{
+    color: COLORS.BLUE,
+    x: 600,
+    y: 200
+  }, {
+    color: COLORS.RED,
+    x: 600,
+    y: 400
+  }, {
+    color: COLORS.GREEN,
+    x: 600,
+    y: 600
+  }],
+  bombs: {}
+}
+
+export default (state =  DEFAULT_STATE, action) => {
   const reducer = {
+    [UPDATE_BIN_SWAP_COUNTDOWN]() {
+      return {
+        ...state,
+        binSwapCountdown: action.remaining
+      }
+    },
     [SWAP_BIN_COLORS]() {
-      var bins = state.bins || INITIAL_BINS
+      var bins = state.bins 
       var firstColor = bins[0].color
       bins[0].color = bins[1].color
       bins[1].color = bins[2].color
@@ -32,22 +56,37 @@ export default (state = {}, action) => {
       const {
         bomb
       } = action
-      let bombs = state.bombs || {}
+      let bombs = {...state.bombs}
       bombs[bomb.id] = bomb
       return {
         ...state,
         bombs
       }
     },
-    [SET_BOMB_LIFETIME]() {
+    [UPDATE_BOMB_LIFETIME]() {
       const {
         id,
         lifetime
       } = action
-      let bombs = state.bombs || {}
+      let bombs = {...state.bombs}
       let bomb = bombs[id]
       if (!bomb) throw new Error("Bomb not found")
       bomb.lifetime = lifetime
+      return {
+        ...state,
+        bombs
+      }
+    },
+    [DISARM_BOMB]() {
+      const {
+        id
+      } = state
+      let bombs = {...state.bombs}
+      let bomb = bombs[id]
+      if(bomb.isAlive) {
+        bomb.isAlive = false
+        bomb.didExplode = false
+      }
       return {
         ...state,
         bombs
@@ -57,12 +96,12 @@ export default (state = {}, action) => {
       const {
         id
       } = action
-      const {
-        bombs
-      } = state
+      let bombs = {...state.bombs}
       let bomb = bombs[id]
-      bomb.isAlive = false
-      bomb.didExplode = true
+      if(bomb.isAlive) {
+        bomb.isAlive = false
+        bomb.didExplode = true
+      }
       return {
         ...state,
         bombs

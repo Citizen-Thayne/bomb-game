@@ -1,8 +1,13 @@
 import { createEpicMiddleware, combineEpics } from 'redux-observable'
-import BombEpic from './BombEpic'
+
+import BinTimerEpic from './BinTimerEpic'
+import BombFuseEpic from './BombFuseEpic'
+import BombSpawnEpic from './BombSpawnEpic'
 
 const rootEpic = combineEpics(
-  BombEpic
+  BombFuseEpic,
+  BinTimerEpic,
+  BombSpawnEpic
 )
 
 
