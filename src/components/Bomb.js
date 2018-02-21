@@ -11,24 +11,33 @@ class Bomb extends Component {
     onMouseDown: PropTypes.func,
     onMouseUp: PropTypes.func,
     onTouchStart: PropTypes.func,
-    onTouchEnd: PropTypes.func,
+    onTouchEnd: PropTypes.func
   }
   render() {
-    let { color, style, className, onMouseDown, onMouseUp, onTouchStart, onTouchEnd, lifetime} = this.props
+    let {
+      color,
+      style,
+      className,
+      onMouseDown,
+      onMouseUp,
+      onTouchStart,
+      onTouchEnd,
+      lifetime
+    } = this.props
     style = {
       ...style,
       backgroundColor: color
     }
     return (
-      <div 
-        className={`bomb ${className}`} 
+      <div
+        className={`bomb ${className}`}
         style={style}
         onMouseDown={onMouseDown}
         onMouseUp={onMouseUp}
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
-        >
-        <div className='bomb-lifetime'>{lifetime}</div>
+      >
+        <div className="bomb-lifetime">{lifetime}</div>
       </div>
     )
   }
