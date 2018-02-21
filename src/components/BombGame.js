@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+import ScoreContainer from '../containers/ScoreContainer'
 import BombBinContainer from '../containers/BombBinContainer'
 import BombBinCountdownContainer from '../containers/BombBinCountdownContainer'
 import BombCollectionContainer from '../containers/BombCollectionContainer'
@@ -18,6 +19,7 @@ class BombGame extends Component {
     }
     return (
       <div className="bomb-game" style={style}>
+        <ScoreContainer></ScoreContainer>
         <BombCollectionContainer />
 
         <BombBinContainer index={0} />

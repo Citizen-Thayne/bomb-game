@@ -7,6 +7,8 @@ export const DISARM_BOMB = 'DISARM_BOMB'
 export const DETONATE_BOMB = 'DETONATE_BOMB'
 export const UPDATE_BOMB_POSITION = 'UPDATE_BOMB_POSITION'
 export const UPDATE_BIN_SIZE = 'UPDATE_BIN_SIZE'
+export const INCREMENT_SCORE = 'INCREMENT_SCORE'
+export const DECREMENT_SCORE = 'DECREMENT_SCORE'
 
 export function startGame() {
   return {
@@ -72,3 +74,6 @@ export function updateBinSize(id, size) {
     size
   }
 }
+
+export const decrementScore = () => ({type: DECREMENT_SCORE})
+export const incrementScore = () => ({type: INCREMENT_SCORE})

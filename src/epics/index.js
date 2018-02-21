@@ -4,12 +4,14 @@ import BinTimerEpic from './BinTimerEpic'
 import BombFuseEpic from './BombFuseEpic'
 import BombSpawnEpic from './BombSpawnEpic'
 import BombDragEpic from './BombDragEpic';
+import ScoreEpic from './ScoreEpic';
 
 const rootEpic = combineEpics(
   BombFuseEpic,
   BinTimerEpic,
   BombSpawnEpic,
-  BombDragEpic
+  BombDragEpic,
+  ScoreEpic
 )
 
 

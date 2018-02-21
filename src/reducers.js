@@ -7,7 +7,9 @@ import {
   UPDATE_BOMB_POSITION,
   DISARM_BOMB,
   UPDATE_BIN_SWAP_COUNTDOWN,
-  UPDATE_BIN_SIZE
+  UPDATE_BIN_SIZE,
+  DECREMENT_SCORE,
+  INCREMENT_SCORE
 } from './actions'
 
 const BIN_SWAP_INTERVAL = 40
@@ -112,7 +114,7 @@ export default (state = DEFAULT_STATE, action) => {
       let bomb = bombs[id]
       bomb.x = x
       bomb.y = y
-      
+
       return {
         ...state,
         bombs
@@ -123,6 +125,20 @@ export default (state = DEFAULT_STATE, action) => {
       const bins = { ...state.bins }
       bins[id].size = size
       return { ...state, bins }
+    },
+    [DECREMENT_SCORE]() {
+      const { score = 0 } = state
+      return {
+        ...state,
+        score: score - 1
+      }
+    },
+    [INCREMENT_SCORE]() {
+      const { score = 0 } = state
+      return {
+        ...state,
+        score: score + 1
+      }
     }
   }[action.type]
   return reducer ? reducer() : state

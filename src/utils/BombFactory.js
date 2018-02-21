@@ -8,8 +8,8 @@ const BombFactory = () => ({
   id: getNextId(),
   color: _.sample(Object.values(COLORS)),
   lifetime: _.random(5) + 5,
-  initialX: _.random(800),
-  initialY: _.random(400),
+  initialX: _.random(700),
+  initialY: _.random(450),
   diameter: 100,
   isAlive: true,
   didExplode: false

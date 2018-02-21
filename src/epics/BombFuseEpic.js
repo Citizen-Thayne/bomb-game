@@ -16,8 +16,9 @@ import {
   detonateBomb,
   SPAWN_BOMB
 } from '../actions';
+import { filter } from 'rxjs/operators/filter';
 
-const BombFuseEpic = action$ =>
+const BombFuseEpic = (action$, { getState }) =>
   action$.pipe(
     ofType(SPAWN_BOMB),
     mergeMap(({
@@ -26,7 +27,8 @@ const BombFuseEpic = action$ =>
       mapTo(-1),
       scan((acc, curr) => curr ? curr + acc : acc, bomb.lifetime),
       takeWhile(v => v >= 0),
-      map(val => val ? updateBombLifetime(bomb.id, val) : detonateBomb(bomb.id))
+      map(val => val ? updateBombLifetime(bomb.id, val) : detonateBomb(bomb.id)),
+      filter(() => getState().bombs[bomb.id].isAlive)
     ))
   )
 
