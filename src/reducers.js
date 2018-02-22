@@ -9,7 +9,8 @@ import {
   UPDATE_BIN_SWAP_COUNTDOWN,
   UPDATE_BIN_SIZE,
   DECREMENT_SCORE,
-  INCREMENT_SCORE
+  INCREMENT_SCORE,
+  GAME_OVER
 } from './actions'
 
 const BIN_SWAP_INTERVAL = 40
@@ -138,6 +139,12 @@ export default (state = DEFAULT_STATE, action) => {
       return {
         ...state,
         score: score + 1
+      }
+    },
+    [GAME_OVER]() {
+      return {
+        ...state,
+        gameOver: true
       }
     }
   }[action.type]

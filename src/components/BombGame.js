@@ -4,6 +4,7 @@ import ScoreContainer from '../containers/ScoreContainer'
 import BombBinContainer from '../containers/BombBinContainer'
 import BombBinCountdownContainer from '../containers/BombBinCountdownContainer'
 import BombCollectionContainer from '../containers/BombCollectionContainer'
+import GameOverContainer from '../containers/GameOverContainer'
 
 class BombGame extends Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class BombGame extends Component {
     return (
       <div className="bomb-game" style={style}>
         <ScoreContainer></ScoreContainer>
+        <GameOverContainer></GameOverContainer>
         <BombCollectionContainer />
 
         <BombBinContainer index={0} />

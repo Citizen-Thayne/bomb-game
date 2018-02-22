@@ -38,3 +38,11 @@
   line-height: 25px;
   text-align: center;
 }
+
+.game-over{
+  position: absolute;
+}
+
+.hidden {
+  display: none;
+}

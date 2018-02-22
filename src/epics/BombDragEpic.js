@@ -1,7 +1,8 @@
-import { UPDATE_BOMB_POSITION, disarmBomb, detonateBomb } from '../actions'
+import { UPDATE_BOMB_POSITION, disarmBomb, detonateBomb, GAME_OVER } from '../actions'
 import { ofType } from 'redux-observable'
 import { filter } from 'rxjs/operators/filter'
 import { map } from 'rxjs/operators/map'
+import { takeUntil } from 'rxjs/operators/takeUntil';
 
 const isBombInBin = bomb => bin => {
   const diameter = bomb.diameter
@@ -39,7 +40,8 @@ const BombDragEpic = (action$, store) => {
         }
       }
     }),
-    filter(action => !!action)
+    filter(action => !!action),
+    takeUntil(action$.pipe(ofType(GAME_OVER)))
   )
 }
 

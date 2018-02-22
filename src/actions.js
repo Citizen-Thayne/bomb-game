@@ -9,6 +9,7 @@ export const UPDATE_BOMB_POSITION = 'UPDATE_BOMB_POSITION'
 export const UPDATE_BIN_SIZE = 'UPDATE_BIN_SIZE'
 export const INCREMENT_SCORE = 'INCREMENT_SCORE'
 export const DECREMENT_SCORE = 'DECREMENT_SCORE'
+export const GAME_OVER = 'GAME_OVER'
 
 export function startGame() {
   return {
@@ -77,3 +78,4 @@ export function updateBinSize(id, size) {
 
 export const decrementScore = () => ({type: DECREMENT_SCORE})
 export const incrementScore = () => ({type: INCREMENT_SCORE})
+export const gameOver = () => ({type: GAME_OVER})
