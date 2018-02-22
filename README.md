@@ -1,5 +1,5 @@
 # Bomb Game 
-## Can you defuse the bombs before they explode?
+Can you defuse the bombs before they explode?
 
 ## How To Play
 * Earn points by draggin them into the defused bins (squares). 
